@@ -1,7 +1,5 @@
-import { Box } from "@shopify/polaris";
 import { authenticate } from "app/shopify.server";
 import db from "app/db.server";
-import { useLoaderData } from "@remix-run/react";
 
 export const loader = async ({ request }: { request: Request }) => {
   const { session } = await authenticate.public.appProxy(request);
@@ -18,16 +16,3 @@ export const loader = async ({ request }: { request: Request }) => {
 
   return bundles;
 };
-
-export default function Bundles() {
-  const data = useLoaderData<typeof loader>();
-
-  console.log(data);
-
-  return (
-    <Box>
-      <h1>Bundles</h1>
-      {JSON.stringify(data)}
-    </Box>
-  );
-}
