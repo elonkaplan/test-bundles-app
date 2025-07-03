@@ -1,5 +1,6 @@
 import { authenticate } from "app/shopify.server";
 import db from "app/db.server";
+import { json } from "@remix-run/node";
 
 export const loader = async ({ request }: { request: Request }) => {
   const { session } = await authenticate.public.appProxy(request);
@@ -14,5 +15,5 @@ export const loader = async ({ request }: { request: Request }) => {
     orderBy: { createdAt: "desc" },
   });
 
-  return { bundles };
+  return json(bundles);
 };
